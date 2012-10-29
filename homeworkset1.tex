@@ -52,19 +52,6 @@ extendedchars=true
 
 \vskip.25in
 \noindent\textbf{Problem 1 (10 pts):}  
-Assume that you are starting from ``scratch'' at the directory \verb+~/+.
-Provide a sequence of git/bash commands that yields a git folder with 
-a commit history such that:
-\begin{itemize}
-\item the \emph{master} branch has commits $A$, $B$, $C$, $X$ and $D$,
-\item the \emph{alt} branch has commits $A$, $B$, $X$,
-\end{itemize}
-Suppose that you are currently working on \texttt{master} branch. Draw 
-its commit history graph (i.e., the graph portion of the output of
-\verb+git log --graph --oneline+).  Next, assume that 
-you are on \texttt{alt} branch. Draw its commit history graph.  
-
-
 \noindent\textbf{}
 \\
 In this problem, I used the following code:  
@@ -96,10 +83,11 @@ In this problem, I used the following code:
   \\  git log --graph --oneline
   \\  git push https://github.com/zhendanzhu/honda.git master
   \\  git push https://github.com/zhendanzhu/honda.git alt
+\\The graphs are as following:
 
 \begin{figure}[h]
     \begin{center}
-        \includegraphics{grapha.png}
+        \includegraphics[scale=0.3]{grapha.png}
     \end{center}
     \caption{The history graph for master branch}
     \label{fig:branch}
@@ -107,36 +95,18 @@ In this problem, I used the following code:
 
 \begin{figure}[h]
     \begin{center}
-        \includegraphics{graphb.png}
+        \includegraphics[scale=0.3]{graphb.png}
     \end{center}
     \caption{The history graph for alt branch}
     \label{fig:branch}
 \end{figure}
 
 
+\newpage
 \vskip.25in
 \noindent\textbf{Problem 2 (10 pts):}
-Assume that you are starting from ``scratch'' at the directory \verb+~/+.
-Provide a sequence of git/bash commands that yields a git folder and 
-\begin{itemize}
-\item configure your git with your name and your email address,
-\item set up an alias for each of the git remotes listed below:
-\begin{verbatim}
-git://github.com/nhlee/550400.stanza1.git 
-git://github.com/nhlee/550400.stanza2.git 
-git://github.com/nhlee/550400.stanza3.git 
-\end{verbatim}
-Assume that each remote contains exactly single commit with 
-a txt file for a single (different) stanza,
-\item pull to combine three stanzas of a poem,
-\item after the first pull, add the title of the poem,
-\item after the second and third pull, resolve the merge conflict,
-\item after resolving the third pull merge conflict, push the result
-  to your (newly created) remote repository. 
-\end{itemize}
-
 \noindent\textbf
-mkdir newpoem
+\\mkdir newpoem
 \\cd  \textasciitilde/newpoem
 \\git config --global user.name "zhendanzhu"
 \\git config --global user.email zhendanzhu@hotmail.com
@@ -207,9 +177,9 @@ you are to consider.  So, \emph{be sure to consult IMM}.
 
 \vskip.25in
 \noindent\textbf{Problem:}
- Resolve the conflicts between different editions based on workflow design.
-\\ When will be the conflicts? Well, if C is behind the others, say haven't finish the timeline while A B D have already start the work. Or they have done the work on different editions, when they merge them together, they will find conflicts in the contents done by other people. The best way to solve it is by keep each teammate informed of the confict so that they can solve it in time. However, given that each person may have flexible schedule, I think the better way is to reduce the total number of merging and marked on the part to be merged.\\
-\noindent\textbf{ Outline for the model:}
+ Try to resolve the conflicts between different editions based on workflow design.
+\\ In this problem, there are two endogenous variables:  the total number of editions and  total number of conflicts. The exogenous variable is the total time we spend on the merging part. In our github design, we will try to reduce the time we merge files together. Either increasing total number of editions or the total number of merging conflicts will increase the total time we spend on combining files.  When will there be the conflicts? Well, if C is behind the others, say haven't finish the timeline while A B D have already start the work, then there will be a conflict. The best way to solve it is desiging a git process structure to reduce conflicts as well as reduce the total number of editions and save the time in the merging process\\
+\\\noindent\textbf{ Outline for the model:}
 \\Proposal plan 1: We will have only one branch, i.e, all the work will be done in master branch, and each time one finished his work, he can push it back to the master's branch. 
 
 \begin{tikzpicture}
@@ -225,13 +195,13 @@ you are to consider.  So, \emph{be sure to consult IMM}.
   \node (n8) at (10,2)  {Mfinal};
   \foreach \from/\to in {n1/n2,n2/n3,n3/n4,n4/n5,n5/n6,n6/n7,n7/n8}
     \draw (\from) -- (\to);
-\end{tikzpicture}\\
+   \label{The figure for plan 1}
+\end{tikzpicture}
 
-Stength:keep each person's newest edition updated in time.
-\\ Weakness: the workflow will be a mess if each one of the team submit the unfinished part. It needs many merges during the process, which will lower the efficiency of the project.
-\\Proposal plan 2: Since $A $B $C $D have relatively independent part of the project, each one can work on his/her own branch first, and merge to the master's branch when it is done. Considering different person may work asynchronously. Each time there's a conflict in merging, we can simply keep what it is for our own part and wait for the other one to update their part . Since C is responsible for timeline, it can be done independently in one file. If eventually C finished first, then A B D can follow the timeline to do their part and update their work in a fixed schedule. If C haven't finish his part, then A B D can work in a free way as long as they pull the latest edition from the github before they start working on their part. 
+\ The stength for this plan is keeping each person's newest edition updated in time. However,the workflow will be a mess if each one of the team submit the unfinished part.It requires many merges during the process. We'll lose the efficiency of the project.\\
+\\Proposal plan 2: Since A ,B ,C and D have relatively independent part of the project, each one can work on his/her own branch first, and merge to the master's branch when it is done. Considering different person may work asynchronously. Each time there's a conflict in merging, we can simply keep what it is for our own part and wait for the other one to update their part . Since C is responsible for timeline, it can be done independently in one file. If eventually C finished first, then A, B, D can follow the timeline to do their part and update their work in a fixed schedule. If C haven't finish his part, then A, B, D can work in a free way as long as they pull the latest edition from the github before they start working on their part. \\
 \\Strength: Each one of the team will have its independent part, so that we can reduce the times of merge. Keep completeness of each one's work while make a clear outline for the whole process. 
-\\Weakness, the number of conflicts will be a headache when B merged his file with master branch if  A, C, D  updated their part during B's work. So one person may need to solve the conflicts of merge of several person's editions. 
+\\Weakness: the number of conflicts will be a headache when B merged his file with master branch if  A, C, D  updated their part during B's work. So one person may need to solve the conflicts of merge of several person's editions. 
 
 \begin{tikzpicture}
   [scale=1.5,auto=left,every node/.style={circle,fill=blue!20}]
@@ -256,7 +226,7 @@ Stength:keep each person's newest edition updated in time.
 
 \end{tikzpicture}
 
-Final Recommendation: Plan 2 will be good, because it has an individual branch for each person. Each one of team can keep track of others work ( individual branch) while have a clean clue about the process of the whole project( master branch).
+Final Recommendation: Plan 2 will be better.  Compared with plan 1, it will face less merging conflicts, and thus reduce the time spent on merging effectively. On the other hand, each one of team can keep track of others work (individual branch), each teammates can keep track the continuous process of his or her part of the project .
 
 
 
@@ -276,9 +246,9 @@ your own words.
 
 \vskip0.25in
 
-\noindent\textbf{Problem:}  
-\\ Is the game fair?A general standard for this is if the roles of the competitors are reversed, their probability of
-winning does not change. Our original problem can be breaked down to several parts: whether the player who is first to serve will be in advantage?  What will be the chances for the first game server to win the match given the probability of winning rate for each ball? And to what extent will the advantage be?
+\noindent\textbf{Original Problem:}  
+\\ Is the game fair? A general standard for this is if the roles of the competitors are reversed, their probability of
+winning does not change. Our original problem can be breaked down to several parts: whether the player who is first to serve will be in advantage?  What will be the chances for the first game server to win the match given the probability of winning rate for each ball? And to what extent will the advantage be?\\
 
 \noindent\textbf{Outline for the model:}   We are going to calculate the probability that the first server to win the match. According to tennis rule, one player delivers the ball to start the game, called server; and one who receives the ball is called receiver. We simplified the rule by stating that each tennis game into a rule that any person who wins two straight points will win the game.And there are 6 games in a match. The possible condition for a game is as following:
 
@@ -291,36 +261,43 @@ winning does not change. Our original problem can be breaked down to several par
 \end{figure}
 
 
- Condition: For both players, the chances for the server to win is P, and the probability for the receiver is 1-P. 
+Condition: For both players, the chances for the server to win is $P$, and the probability for the receiver is $1-P$. \\
 
-Analysis: Whether the game is fair or not depends on the server's winning rate P on each ball. For each player, the chance to win a game is the same, it equals $Q=P^2/(P^2+(1-P)^2)$. The chance to lose the game is $(1-P)^2/(P^2+(1-P)^2)$.  If P>1/2, then the winning rate for the server in each game is bigger than 1/2. Given the rule for winning a tennis match is the one who wins the fisrt 6 games will win. The final score can be "6:0", " 6:1" , "6:2" ...The total chance for the first server to win is 
+\noindent\textbf{Formulate the Problem:}  Whether or not the game is fair depends on the server's winning rate $P$ on each ball. For each player, the chance to win a game is the same, it equals $Q=P^2/(P^2+(1-P)^2)$. The chance to lose the game is $(1-P)^2/(P^2+(1-P)^2)$.  If P$>$1/2, then the winning rate for the server in each game is bigger than 1/2. Given the rule for winning a tennis match is the one who wins the fisrt 6 games will win. The final score can be ``6:0", ``6:1" , ``6:2" \ldots The total chance for the first server to win is 
 
 
 \[
- \sum_{k=0}^{5} {k+5\choose 6}{Q^6(1-Q)^k}
+ \sum_{k=0}^{5} {k+5\choose 6}{Q^6(1-Q)^k.}
 \]
 
+\newpage
 The value for this function is show as following 
 
 \begin{figure}[h]
     \begin{center}
-        \includegraphics[scale=0.8]{graph3.png}
+        \includegraphics[scale=0.6]{graph3.png}
     \end{center}
     \caption{The graph for possible winning rate}
     \label{fig:branch}
 \end{figure}
 
-Code is as following(Figure 4):
+Code is as following:
 \begin{figure}[h]
     \begin{center}
-        \includegraphics{code.png}
+        \includegraphics[scale=0.5]{code.png}
     \end{center}
     \caption{Matlab code}
     \label{fig:branch}
 \end{figure}
 
 \noindent\textbf{}
-We will conclude that the fairness of tennis depends on the capability of each play.The stronger the server, the more advantage he will have in the tennis game. Especially, when P=1/2, the chance for each player to win equals 1/2. The game is absolutely fair. On the other hand, if the receiver is strong enough that the chance for him to win each point exceeds 1/2, then he will have the advantage. So tennis is a fair game if each person has a relatively equal winning rate in both server's game and receiver's game.
+\\We will conclude that the fairness of tennis depends on the capability of each player.The stronger the server, the more advantage he will have in the tennis game. Especially, when $P=1/2$, the game is absolutely fair. Both receiver and server will have fair chance to win each game. On the other hand, if the receiver is strong enough that the chance for him to win each point exceeds 1/2, then he will have the advantage. So tennis is a fair game if each person has a relatively equal winning rate in both server's game and receiver's game.\\
+
+\noindent\textbf{Is it useful?}
+In this model, there are several assumptions that needs to be proved. One is we assume that winning rate in each game will be the constant, which may effect by the psychological state of the players and the audiences who are supporting one of the player. But in general, the model captures the rules of the tennis game as well as the relation between the winning rate in a game and the chance to win the match in the end. So we will test it with real cases and make the final conclustion.
+
+\noindent\textbf{Test the model}
+\\We are going to use the historical data to back test the estimated rate. The best way is compare the winning rate when he starts as server with the winning rate when he starts as receiver against the same player. Then we are going to compare if there's significant difference between these two rates with statitistical analysis.
 
 
 \vskip0.25in
