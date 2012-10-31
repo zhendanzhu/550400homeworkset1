@@ -34,9 +34,10 @@ extendedchars=true
 
 
 \begin{center}
-{\bf AMS 550.400 \quad HW SET 1\quad  Due Date:  Oct 8}\\
+{\bf AMS 550.400 \quad Revised HW SET 1\quad  Due Date:  Oct 31}\\
 \vskip.2in
 {\footnotesize Last Compiled on \today}
+\\Zhendan Zhu
 \end{center}
 
 \setlength{\unitlength}{1in}
@@ -177,10 +178,10 @@ you are to consider.  So, \emph{be sure to consult IMM}.
 
 \vskip.25in
 \noindent\textbf{Problem:}
- Try to resolve the conflicts between different editions based on workflow design.
-\\ In this problem, there are two endogenous variables:  the total number of editions and  total number of conflicts. The exogenous variable is the total time we spend on the merging part. In our github design, we will try to reduce the time we merge files together. Either increasing total number of editions or the total number of merging conflicts will increase the total time we spend on combining files.  When will there be the conflicts? Well, if C is behind the others, say haven't finish the timeline while A B D have already start the work, then there will be a conflict. The best way to solve it is desiging a git process structure to reduce conflicts as well as reduce the total number of editions and save the time in the merging process\\
-\\\noindent\textbf{ Outline for the model:}
-\\Proposal plan 1: We will have only one branch, i.e, all the work will be done in master branch, and each time one finished his work, he can push it back to the master's branch. 
+ Try to reduce the time spent on resolving conflicts with an optimal git workflow strategy.
+\\ In this problem, there are two endogenous variables: total number of editions and total number of conflicts. There is one exogenous variable: the time we spend on merging. Either increasing total number of editions or total number of merging conflicts will increase the time we spend.  In our workflow strategy, we will try to reduce the time we merge files together. When will there be conflicts?  Well, if one person has updated a part of the file while the others work on the old edition, there will be a conflict. It will cost a lot of time and energy to deal with the conflicts. The best way is designing a git workflow structure that reduces conflicts as well as total number of editions.\\
+\\\noindent\textbf{ Outline for the model:} 
+\\Proposal plan 1: As the following graph shows. All the work will be done in master branch, and each person pull it from the master's branch, update the file and push it back to the master's branch. 
 
 \begin{tikzpicture}
   [scale=1.5,auto=left,every node/.style={circle,fill=blue!20}]
@@ -196,12 +197,14 @@ you are to consider.  So, \emph{be sure to consult IMM}.
   \foreach \from/\to in {n1/n2,n2/n3,n3/n4,n4/n5,n5/n6,n6/n7,n7/n8}
     \draw (\from) -- (\to);
    \label{The figure for plan 1}
+   \title{The figure for plan 1}
 \end{tikzpicture}
 
-\ The stength for this plan is keeping each person's newest edition updated in time. However,the workflow will be a mess if each one of the team submit the unfinished part.It requires many merges during the process. We'll lose the efficiency of the project.\\
-\\Proposal plan 2: Since A ,B ,C and D have relatively independent part of the project, each one can work on his/her own branch first, and merge to the master's branch when it is done. Considering different person may work asynchronously. Each time there's a conflict in merging, we can simply keep what it is for our own part and wait for the other one to update their part . Since C is responsible for timeline, it can be done independently in one file. If eventually C finished first, then A, B, D can follow the timeline to do their part and update their work in a fixed schedule. If C haven't finish his part, then A, B, D can work in a free way as long as they pull the latest edition from the github before they start working on their part. \\
-\\Strength: Each one of the team will have its independent part, so that we can reduce the times of merge. Keep completeness of each one's work while make a clear outline for the whole process. 
-\\Weakness: the number of conflicts will be a headache when B merged his file with master branch if  A, C, D  updated their part during B's work. So one person may need to solve the conflicts of merge of several person's editions. 
+\newpage
+The strength for this plan is keeping each person's newest edition updated in time. However, the workflow permits only one person work in one period. When he is done, the other person can go on to update the file without overwrite it. If two person work in the same time, it requires many merges during the pulling process. As the previous graph shows, if each person push one original file and update the file for once, there will be in total 7 merges. We'll lose the efficiency of the project.\\
+\\Proposal plan 2: Since A ,B ,C and D have relatively independent part of the project, each one can work on his/her own branch first, and merge to the master's branch when it is done. Considering different person may work asynchronously. Each time there's a conflict in merging, we can simply keep what it is for our own part and wait for the other one to update their part. Since C is responsible for timeline, it can be done independently in one file. If eventually C finished first, then A, B, D can follow the timeline to do their part and update their work in a fixed schedule. If C haven't finish his part, then A, B, D can work in a free way as long as they pull the latest edition from the github before they start working on their part. \\
+\\Strength: Each one of the team will have its independent part, so that we can reduce the number of merge conflicts. Thus it will reduce a lot of time in merging part.
+\\Weakness: the merging part will be a headache when B merged his file with master branch if  A, C, D  still work on the old edition. So someone from A, C, D needs to resolve the conflicts of merge the work of B. 
 
 \begin{tikzpicture}
   [scale=1.5,auto=left,every node/.style={circle,fill=blue!20}]
@@ -226,7 +229,7 @@ you are to consider.  So, \emph{be sure to consult IMM}.
 
 \end{tikzpicture}
 
-Final Recommendation: Plan 2 will be better.  Compared with plan 1, it will face less merging conflicts, and thus reduce the time spent on merging effectively. On the other hand, each one of team can keep track of others work (individual branch), each teammates can keep track the continuous process of his or her part of the project .
+Final Recommendation: plan 2 will be better. Compared with plan 1, plan 2 has same number of editions and less merging conflicts,  which will save time effectively. On the other hand, each member of the team can keep track of the others work (individual branch) while have a clean idea of the main project (master branch).
 
 
 
@@ -248,9 +251,9 @@ your own words.
 
 \noindent\textbf{Original Problem:}  
 \\ Is the game fair? A general standard for this is if the roles of the competitors are reversed, their probability of
-winning does not change. Our original problem can be breaked down to several parts: whether the player who is first to serve will be in advantage?  What will be the chances for the first game server to win the match given the probability of winning rate for each ball? And to what extent will the advantage be?\\
+winning does not change. Our original problem can be broken down to several parts: whether the player who is first to serve will be in advantage?  What will be the chances for the first game server to win the match given the probability of winning rate for each ball? And to what extent will the advantage be?\\
 
-\noindent\textbf{Outline for the model:}   We are going to calculate the probability that the first server to win the match. According to tennis rule, one player delivers the ball to start the game, called server; and one who receives the ball is called receiver. We simplified the rule by stating that each tennis game into a rule that any person who wins two straight points will win the game.And there are 6 games in a match. The possible condition for a game is as following:
+\noindent\textbf{Outline for the model:}  Based on the winning rate of each game, we can infer the probability that the first server to win the match. According to tennis rule, one player delivers the ball to start the game, called server; and one player receives the ball, called receiver. We simplified the rule so that any person who wins two straight points will win the game. The person who wins 6 games is the winner in a match. The possible conditions for a game are presented as following:
 
 \begin{figure}[h]
     \begin{center}
@@ -263,14 +266,13 @@ winning does not change. Our original problem can be breaked down to several par
 
 Condition: For both players, the chances for the server to win is $P$, and the probability for the receiver is $1-P$. \\
 
-\noindent\textbf{Formulate the Problem:}  Whether or not the game is fair depends on the server's winning rate $P$ on each ball. For each player, the chance to win a game is the same, it equals $Q=P^2/(P^2+(1-P)^2)$. The chance to lose the game is $(1-P)^2/(P^2+(1-P)^2)$.  If P$>$1/2, then the winning rate for the server in each game is bigger than 1/2. Given the rule for winning a tennis match is the one who wins the fisrt 6 games will win. The final score can be ``6:0", ``6:1" , ``6:2" \ldots The total chance for the first server to win is 
-
+\noindent\textbf{Formulate the Problem:}  Whether or not the game is fair depends on the server's winning rate $P$ on each ball. For each player, the chance to win a game is the same, it equals $Q=P^2/(P^2+(1-P)^2)$. The chance to lose the game is $(1-P)^2/(P^2+(1-P)^2)$.  If P$>$1/2, then the winning rate for the server in each game is bigger than 1/2. Given the rule for winning a tennis match is the one who wins the first 6 games will win. The final score can be ``6:0", ``6:1" , ``6:2", etc.  The total chance for the first server to win is 
 
 \[
  \sum_{k=0}^{5} {k+5\choose 6}{Q^6(1-Q)^k.}
 \]
+\\We are going to apply the historical data to back test the estimated rate. The best way is comparing the winning rate of each player as first-server with the winning rate as first-receiver against the same player. Then we are going to test whether there's significant difference between these two rates by two sample T-test.
 
-\newpage
 The value for this function is show as following 
 
 \begin{figure}[h]
@@ -284,35 +286,17 @@ The value for this function is show as following
 Code is as following:
 \begin{figure}[h]
     \begin{center}
-        \includegraphics[scale=0.5]{code.png}
+        \includegraphics[scale=0.6]{code.png}
     \end{center}
     \caption{Matlab code}
     \label{fig:branch}
 \end{figure}
 
-\noindent\textbf{}
-\\We will conclude that the fairness of tennis depends on the capability of each player.The stronger the server, the more advantage he will have in the tennis game. Especially, when $P=1/2$, the game is absolutely fair. Both receiver and server will have fair chance to win each game. On the other hand, if the receiver is strong enough that the chance for him to win each point exceeds 1/2, then he will have the advantage. So tennis is a fair game if each person has a relatively equal winning rate in both server's game and receiver's game.\\
+\noindent\textbf{Is it useful?} \cite{IMM1978} 
+From the model, we can infer that the fairness of tennis depends on the capability of each player. The stronger the server is, the more advantage he will possess. Especially, when $P=1/2$, the game is absolutely fair. Both receiver and server will have equal chance to win each game, thus the same probability to win the match. On the other hand, if the receiver is strong enough that the chance for him to win each point exceeds 1/2, then the game will be favorable to him. However, there are several assumptions that needs to be verified to make sure the conclusion is correct. One assumption is that winning rate in each game is constant. As we know, the result of pervious game may effect the psychological state of the players and make a difference on the next game. So the first server may have more advantage if he wins his serving game. With the historical test result, we can make the final conclusion.
 
-\noindent\textbf{Is it useful?}
-In this model, there are several assumptions that needs to be proved. One is we assume that winning rate in each game will be the constant, which may effect by the psychological state of the players and the audiences who are supporting one of the player. But in general, the model captures the rules of the tennis game as well as the relation between the winning rate in a game and the chance to win the match in the end. So we will test it with real cases and make the final conclustion.
-
-\noindent\textbf{Test the model}
-\\We are going to use the historical data to back test the estimated rate. The best way is compare the winning rate when he starts as server with the winning rate when he starts as receiver against the same player. Then we are going to compare if there's significant difference between these two rates with statitistical analysis.
+\bibliographystyle{plain}
+\bibliography{biblioHW}
 
 
-\vskip0.25in
-\noindent\textbf{Final Remarks about Problem 3 \& Problem 4:} 
-They are open-ended problems.  However, your scores will be determined
-by how well do you follow the exposition style outlined by IMM and
-WMA.  For both problems, your write-up should be 
-\begin{itemize}
-\item self-contained,
-\item covering all four parts of Section 1.3 of IMM,
-\item paying a particular attention to any causal relation that you
-  might be investigating, following Chapter 3 of WMA,
-\item answering questions that are explicitly asked in the problem statements.
-\end{itemize}
-For Problem 3, focus mostly on Step 2 and Step 3 of Section
-1.3 of IMM.  For Problem 4, focus mostly on Step 1 and Step
-2.  For each problem, minimum 1 pages and maximum 2 pages.
 \end{document}
